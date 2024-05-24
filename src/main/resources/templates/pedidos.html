@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Pedidos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .header h1 {
+            color: #4CAF50; /* Color inspirado en colores naturales */
+        }
+        .facturas {
+            margin-top: 20px;
+        }
+        .factura {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f1f1f1;
+        }
+        .direccion {
+            font-weight: bold;
+            color: #333;
+        }
+        .productos {
+            margin-top: 10px;
+        }
+        .producto {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding: 5px 0;
+        }
+        .producto:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Historial de Pedidos</h1>
+        <h2>Hola, <span th:text="${user.firstName}"></span></h2>
+    </div>
+    <div class="facturas" id="facturas">
+        <!-- Facturas serán insertadas aquí -->
+    </div>
+    <a href="/"> Volver </a>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/facturas/factura')
+            .then(response => response.json())
+            .then(data => {
+                const facturasDiv = document.getElementById('facturas');
+                data.forEach(factura => {
+                    const facturaDiv = document.createElement('div');
+                    facturaDiv.classList.add('factura');
+
+                    const direccion = document.createElement('div');
+                    direccion.classList.add('direccion');
+                    direccion.innerText = `Dirección: ${factura.direccion}`;
+
+                    const total = document.createElement('div');
+                    total.innerText = `Valor Total: ${factura.total}`;
+
+                    facturaDiv.appendChild(direccion);
+                    facturaDiv.appendChild(total);
+
+                    const productosDiv = document.createElement('div');
+                    productosDiv.classList.add('productos');
+
+                    factura.detalles.forEach(detalle => {
+                        const productoDiv = document.createElement('div');
+                        productoDiv.classList.add('producto');
+
+                        const nombreProducto = document.createElement('div');
+                        nombreProducto.innerText = detalle.nombreProducto;
+
+                        const precioTotal = document.createElement('div');
+                        precioTotal.innerText = `Precio Total: ${detalle.precioTotal}`;
+
+                        productoDiv.appendChild(nombreProducto);
+                        productoDiv.appendChild(precioTotal);
+                        productosDiv.appendChild(productoDiv);
+                    });
+
+                    facturaDiv.appendChild(productosDiv);
+                    facturasDiv.appendChild(facturaDiv);
+                });
+            })
+            .catch(error => console.error('Error fetching facturas:', error));
+    });
+</script>
+</body>
+</html>

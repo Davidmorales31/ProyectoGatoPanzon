@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{header.title}">Gatopanzon</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<body>
+<header class="header">
+    <div class="menu container">
+        <a href="#" class="logo" th:text="#{logo}">logo</a>
+        <input type="checkbox" id="menu"/>
+        <label for="menu">
+            <img src="menu.png" class="menu-icono" alt="menu">
+        </label>
+
+        <nav class="navbar">
+            <ul>
+                <li><a href="#" th:text="#{Inicio}">Inicio</a></li>
+                <li><a href="#" th:text="#{Productos}">Productos</a></li>
+                <li><a href="#" th:text="#{Nosotros}">Nosotros</a></li>
+                <li><a href="#" th:text="#{Contactanos}">Contactanos</a></li>
+               <li><a href="/?lang=en" th:text="#{Languaje}">English</a></li>
+
+
+            </ul>
+        </nav>
+    </div>
+    <div class="header-content container">
+        <div class="header-txt">
+            <h1 th:text="#{welcome.message}">Bienvenido</h1>
+            <p th:if="${user != null}" th:text="'Hola, ' + ${user.firstName} + ' ' + ${user.lastName} + '!'"></p>
+            <p th:if="${user == null}">
+                <span th:text="#{please.login}">Por favor,</span>
+                <a th:href="@{/login}" th:text="#{login}">#{login}</a>
+                <span th:text="#{or}">o</span>
+                <a th:href="@{/registro}" th:text="#{register}">regístrate</a>.
+            </p>
+            <form th:if="${user != null}" action="/logout" method="post">
+                <button class="btn btn-danger" type="submit" th:text="#{logout}">Cerrar sesión</button>
+            </form>
+            <h1 th:text="#{home.delivery.desserts}">Postres a domicilio</h1>
+            <h3 class="header-txt" th:text="#{best.desserts.selection}">la mejor seleccion de postres</h3>
+        </div>
+    </div>
+</header>
+
+<section class="information container">
+    <div class="information-content">
+        <div class="information-1">
+            <div class="information-c1">
+                <h3 th:text="#{orders}">Pedidos</h3>
+                <p th:text="#{orders.desc}">oli</p>
+            </div>
+            <div class="information-a1">
+                <img src="reservation.jpg" alt="">
+            </div>
+        </div>
+        <div class="information-2">
+            <div class="information-b1">
+                <img src="reservation2.jpg" alt="">
+            </div>
+            <div class="information-c1">
+                <h3 th:text="#{about.us}">Nosotros</h3>
+                <p th:text="#{about.us.description}">El Gato panzon inicio como un emprendimiento desde casa para ganar algo de dinero extra, siendo este una forma de aprovechar el hobbie que desarrollé en pandemia, pues la reposteria ha sido mi pasion desde hace un tiempo, tome en cuenta los consejos de mis padres para iniciarlo, pues estos gustaban mucho de mis productos y me impulsaron a emprender con estos.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="our">
+    <div class="container">
+        <h2 th:text="#{products}">Productos</h2>
+    </div>
+</section>
+
+<section class="oferts">
+    <div class="ofert-content container">
+        <div class="ofert-1">
+            <div class="ofert-txt">
+                <h3 th:text="#{passion.fruit.pie}">píe de Maracuyá</h3>
+                <p th:text="#{passion.fruit.pie.description}">Tarta con base de galleta en frio, crema de maracuya y caramelo</p>
+
+            </div>
+            <div class="ofert-img">
+                <img src="pro1.jpg" alt="">
+            </div>
+        </div>
+
+        <div class="ofert-1">
+            <div class="ofert-img">
+                <img src="pro2.jpg" alt="">
+            </div>
+            <div class="ofert-txt">
+                <h3 th:text="#{napoleon.dessert}">Postre Napoleon</h3>
+                <p th:text="#{napoleon.dessert.description}">Base de galleta, crema batida con arequipe y almibar.</p>
+
+            </div>
+        </div>
+
+        <div class="ofert-1">
+            <div class="ofert-txt">
+                <h3 th:text="#{lemon.dessert}">Postre de Limon</h3>
+                <p th:text="#{lemon.dessert.description}">Crema de limon y ralladura del mismo, sobre una base de galletas.</p>
+
+            </div>
+            <div class="ofert-img">
+                <img src="pro3.jpg" alt="">
+            </div>
+        </div>
+
+        <div class="ofert-1">
+            <div class="ofert-img">
+                <img src="pro4.jpg" alt="">
+            </div>
+            <div class="ofert-txt">
+                <h3 th:text="#{tiramisu.dessert}">Postre de Tiramisú</h3>
+                <p th:text="#{tiramisu.dessert.description}">Clasico postre italiano, de cafe con base de claras y queso crema.</p>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg"></section>
+
+<section class="food container">
+    <h2 th:text="#{menu}">Menu</h2>
+    <span th:text="#{desserts.selection}">Seleccion de Postres</span>
+    <div class="food-content">
+        <div class="left">
+            <div class="food-1">
+                <h3 th:text="#{passion.fruit.tart}">Tarta de Maracuya</h3>
+                <div class="food-txt">
+                    <p th:text="#{precioU}">Lorem ipsum dolor sit</p>
+                    <p class="precio">7.000 Pesos</p>
+                </div>
+            </div>
+            <div class="food-1">
+                <h3 th:text="#{cholupa.tart}">Tarta de Cholupa</h3>
+                <div class="food-txt">
+                    <p th:text="#{precioU}">Lorem ipsum dolor sit</p>
+                    <p class="precio">7.000 Pesos</p>
+                </div>
+            </div>
+            <div class="food-1">
+                <h3 th:text="#{lemon.dessert}">Postre de limon</h3>
+                <div class="food-txt">
+                    <p th:text="#{precioU}">Lorem ipsum dolor sit</p>
+                    <p class="precio">7.000 Pesos</p>
+                </div>
+            </div>
+            <div class="food-1">
+                <h3 th:text="#{tiramisu.dessert}">Postre de Tiramisu</h3>
+                <div class="food-txt">
+                    <p th:text="#{precioU}">Lorem ipsum dolor sit</p>
+                    <p class="precio">7.000 Pesos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="food-1">
+                <h3 th:text="#{coconut.lemonade}">Limonada de coco</h3>
+                <div class="food-txt">
+                    <p th:text="#{coconut.lemonade.description}">bebida tropical con limon, coco y cerezas.</p>
+                    <p class="precio">4.000 Pesos</p>
+                </div>
+            </div>
+            <div class="food-1">
+                <h3 th:text="#{cherry.lemonade}">Limonada Cerezada</h3>
+                <div class="food-txt">
+                    <p th:text="#{cherry.lemonade.description}">bebida refrescante sabor a cereza</p>
+                    <p class="precio">5.000 Pesos</p>
+                </div>
+            </div>
+            <div class="food-1">
+                <h3 th:text="#{blackberry.smoothie}">Batido de mora</h3>
+                <div class="food-txt">
+                    <p th:text="#{blackberry.smoothie.description}">Batido de mora y leche con helado</p>
+                    <p class="precio">5.000 Pesos</p>
+                </div>
+            </div>
+            <div class="food-1">
+                <h3 th:text="#{red.fruit.soda}">Soda de frutos rojos</h3>
+                <div class="food-txt">
+                    <p th:text="#{red.fruit.soda.description}">base de ginger ale con mora, fresa, y arandanos.</p>
+                    <p class="precio">6.000 Pesos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para la factura del pedido -->
+    <div class="modal fade" id="facturaModal" tabindex="-1" aria-labelledby="facturaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="facturaModalLabel" th:text="#{order.invoice}">Factura del Pedido</h5>
+                </div>
+                <div class="modal-body" id="facturaModal2">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col" th:text="#{product}">Producto</th>
+                            <th scope="col" th:text="#{quantity}">Cantidad</th>
+                            <th scope="col" th:text="#{unit.price}">Precio Unitario</th>
+                            <th scope="col" th:text="#{total}">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody id="factura-container">
+                        <!-- Aquí se agregarán dinámicamente las filas de la factura -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="modalFacturaClose" th:text="#{close}">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="btnDescargar" th:text="#{download}">Descargar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="food container">
+    <h2 th:text="#{buy}">COMPRAR</h2>
+    <span th:text="#{desserts.selection}">Seleccion de Postres</span>
+    <div class="food-content" id="comprar-container"></div>
+    <button type="button" class="btn btn-primary" id="shoopButton" data-bs-toggle="modal" data-bs-target="#staticBackdrop" th:text="#{go.to.cart}">Ir al Carrito <i class="fa-solid fa-cart-plus" style="color: #ffffff;"></i></button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel" th:text="#{make.purchase}">Realizar Compra</h1>
+                </div>
+                <div class="modal-body">
+                    <div id="carrito-container"></div>
+                    <div id="total-container" class="mt-3">
+                        <h5>Total: <span id="total-precio">0</span></h5>
+                    </div>
+                    <div id="payment-form" class="mt-3" style="display: none;">
+                        <div class="form-group mt-3">
+                            <label for="card-cvc" th:text="#{name}">Nombre</label>
+                            <label type="text" class="form-control" id="lblUser" th:text="${user.lastName}"></label>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-number" th:text="#{card.number}">Número de Tarjeta</label>
+                            <input type="text" class="form-control" id="card-number" placeholder="1234 5678 9012 3456">
+                            <div class="invalid-feedback" th:text="#{valid.card.number}">Por favor, ingresa un número de tarjeta válido.</div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="card-expiry" th:text="#{expiration.date}">Fecha de Expiración</label>
+                            <input type="text" class="form-control" id="card-expiry" placeholder="MM/AA">
+                            <div class="invalid-feedback" th:text="#{valid.expiration.date}">Por favor, ingresa una fecha de expiración válida.</div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="card-cvc" th:text="#{cvc}">CVC</label>
+                            <input type="text" class="form-control" id="card-cvc" placeholder="123">
+                            <div class="invalid-feedback" th:text="#{valid.cvc}">Por favor, ingresa un CVC válido.</div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="card-cvc" th:text="#{address}">Direccion</label>
+                            <input type="text" class="form-control" id="address" placeholder="Cll 26 5W - 14">
+                            <div class="invalid-feedback" th:text="#{valid.address}">Por favor, ingresa una Direccion Valida</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="modalCancelar" th:text="#{cancel}">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="pay-button" th:text="#{pay}">Pagar</button>
+                    <button type="button" class="btn btn-success" id="confirm-payment" style="display: none;" th:text="#{confirm.payment}">Confirmar Pago</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-content container">
+        <div class="link">
+            <span class="logo">Logo</span>
+        </div>
+    </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="html2canvas.js"></script>
+<script src="java.js"></script>
+</body>
+</html>
